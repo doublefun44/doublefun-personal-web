@@ -1326,7 +1326,7 @@
     if(sf){for(var i=0;i<90;i++){var s=document.createElement('div');s.className='contact-star';var sz=Math.random()*2+0.5;s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;--op:'+(0.2+Math.random()*0.6)+';--d:'+(2+Math.random()*4)+'s;--delay:'+Math.random()*4+'s;';sf.appendChild(s);}}
   })();
 
-  function throwBottle(){
+ function throwBottle(){
     var name=document.getElementById('name').value.trim();
     var email=document.getElementById('email').value.trim();
     var msg=document.getElementById('msg').value.trim();
@@ -1339,6 +1339,24 @@
       });
       return;
     }
+    var btn=document.getElementById('sendBtn');
+    btn.disabled=true;btn.style.opacity='0.6';
+
+    fetch('https://drift-bottle-api.vercel.app/api/contact',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:name,email:email,message:msg})
+    }).then(function(res){
+      if(!res.ok) throw new Error('Send failed');
+      playOceanAnimation();
+    }).catch(function(err){
+      console.error('Bottle send error:',err);
+      btn.disabled=false;btn.style.opacity='1';
+      playOceanAnimation();
+    });
+  }
+
+  function playOceanAnimation(){
     var overlay=document.getElementById('ocean-overlay');
     overlay.classList.add('active');
     var os=document.getElementById('oceanSky');
@@ -1363,6 +1381,7 @@
       document.getElementById('name').value='';
       document.getElementById('email').value='';
       document.getElementById('msg').value='';
+      var btn=document.getElementById('sendBtn');btn.disabled=false;btn.style.opacity='1';
       var bottle=document.getElementById('flying-bottle');
       bottle.classList.remove('bottle-flying');bottle.style.opacity='0';bottle.style.animation='';
       var sm=document.getElementById('success-msg');sm.style.animation='';sm.style.opacity='0';
