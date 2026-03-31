@@ -1342,11 +1342,11 @@
     var btn=document.getElementById('sendBtn');
     btn.disabled=true;btn.style.opacity='0.6';
 
-    fetch('https://drift-bottle-api.vercel.app/api/contact',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name:name,email:email,message:msg})
-    }).then(function(res){
+ fetch('https://formspree.io/f/xkoprdwa',{
+  method:'POST',
+  headers:{'Content-Type':'application/json','Accept':'application/json'},
+  body:JSON.stringify({name:name,email:email,message:msg})
+}).then(function(res){
       if(!res.ok) throw new Error('Send failed');
       playOceanAnimation();
     }).catch(function(err){
