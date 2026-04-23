@@ -444,7 +444,7 @@
 
     .expanding-cards{
       display:grid;
-      grid-template-columns:1fr 1fr 12px 1fr 1fr 1fr;
+      grid-template-columns:1fr 1fr 12px 1fr 1fr 1fr 1fr;
       gap:10px;
       height:520px;
       transition:grid-template-columns 0.55s cubic-bezier(0.4,0,0.2,1);
@@ -546,22 +546,23 @@
     }
 
     /* mobile: stack vertically */
-    @media(max-width:768px){
-      .expanding-cards{
-        grid-template-columns:1fr;
-        grid-template-rows:1fr 1fr 32px 1fr 1fr 1fr;
-        height:auto;min-height:700px;
-        transition:grid-template-rows 0.55s cubic-bezier(0.4,0,0.2,1);
-      }
-      .expanding-cards.r0{grid-template-rows:4fr 1fr 32px 1fr 1fr 1fr}
-      .expanding-cards.r1{grid-template-rows:1fr 4fr 32px 1fr 1fr 1fr}
-      .expanding-cards.r2{grid-template-rows:1fr 1fr 32px 4fr 1fr 1fr}
-      .expanding-cards.r3{grid-template-rows:1fr 1fr 32px 1fr 4fr 1fr}
-      .expanding-cards.r4{grid-template-rows:1fr 1fr 32px 1fr 1fr 4fr}
-      .exp-card{min-height:56px}
-      .exp-card-collapsed{flex-direction:row;justify-content:flex-start;padding:0 1.2rem;align-items:center}
-      .exp-card-collapsed-title{writing-mode:horizontal-tb;transform:none;font-size:0.58rem}
-    }
+   @media(max-width:768px){
+  .expanding-cards{
+    grid-template-columns:1fr;
+    grid-template-rows:1fr 1fr 32px 1fr 1fr 1fr 1fr;
+    height:auto;min-height:820px;
+    transition:grid-template-rows 0.55s cubic-bezier(0.4,0,0.2,1);
+  }
+  .expanding-cards.r0{grid-template-rows:4fr 1fr 32px 1fr 1fr 1fr 1fr}
+  .expanding-cards.r1{grid-template-rows:1fr 4fr 32px 1fr 1fr 1fr 1fr}
+  .expanding-cards.r2{grid-template-rows:1fr 1fr 32px 4fr 1fr 1fr 1fr}
+  .expanding-cards.r3{grid-template-rows:1fr 1fr 32px 1fr 4fr 1fr 1fr}
+  .expanding-cards.r4{grid-template-rows:1fr 1fr 32px 1fr 1fr 4fr 1fr}
+  .expanding-cards.r5{grid-template-rows:1fr 1fr 32px 1fr 1fr 1fr 4fr}
+  .exp-card{min-height:56px}
+  .exp-card-collapsed{flex-direction:row;justify-content:flex-start;padding:0 1.2rem;align-items:center}
+  .exp-card-collapsed-title{writing-mode:horizontal-tb;transform:none;font-size:0.58rem}
+}
 
     /* ===== Card 5: More to Come ===== */
     .card-more{background:#020818}
@@ -876,38 +877,38 @@
   </div>
 </div>
         
-        <!-- Card 6: More to Come -->
-        <div class="exp-card card-more" data-index="4">
-          <canvas id="moreCanvas"></canvas>
-          <div class="nebula nb1"></div>
-          <div class="nebula nb2"></div>
-          <div class="horizon"></div>
-          <div class="grid-wrap">
-            <svg viewBox="0 0 300 100" preserveAspectRatio="none">
-              <g stroke="rgba(80,160,255,0.22)" stroke-width="0.6" fill="none">
-                <line x1="0" y1="100" x2="150" y2="0"/><line x1="37" y1="100" x2="150" y2="0"/>
-                <line x1="75" y1="100" x2="150" y2="0"/><line x1="112" y1="100" x2="150" y2="0"/>
-                <line x1="150" y1="100" x2="150" y2="0"/><line x1="188" y1="100" x2="150" y2="0"/>
-                <line x1="225" y1="100" x2="150" y2="0"/><line x1="263" y1="100" x2="150" y2="0"/>
-                <line x1="300" y1="100" x2="150" y2="0"/>
-                <line x1="0" y1="75" x2="300" y2="75"/><line x1="0" y1="50" x2="300" y2="50"/>
-                <line x1="0" y1="25" x2="300" y2="25"/>
-              </g>
-            </svg>
-          </div>
-          <div class="corner c-tl"></div>
-          <div class="corner c-tr"></div>
-          <div class="shoot"></div>
-          <div class="exp-card-overlay"></div>
-          <div class="exp-card-collapsed">
-            <span class="exp-card-collapsed-title">More to Come</span>
-          </div>
-          <div class="exp-card-body">
-            <span class="exp-card-tag">Always &mdash; In progress</span>
-            <h3 class="exp-card-title">More to<br>Come</h3>
-            <p class="exp-card-desc">Still thinking. Still building. The best ideas don't arrive on schedule — they show up when you keep showing up.</p>
-          </div>
-        </div>
+<!-- Card 6: More to Come -->
+<div class="exp-card card-more" data-index="5">
+  <canvas id="moreCanvas"></canvas>
+  <div class="nebula nb1"></div>
+  <div class="nebula nb2"></div>
+  <div class="horizon"></div>
+  <div class="grid-wrap">
+    <svg viewBox="0 0 300 100" preserveAspectRatio="none">
+      <g stroke="rgba(80,160,255,0.22)" stroke-width="0.6" fill="none">
+        <line x1="0" y1="100" x2="150" y2="0"/><line x1="37" y1="100" x2="150" y2="0"/>
+        <line x1="75" y1="100" x2="150" y2="0"/><line x1="112" y1="100" x2="150" y2="0"/>
+        <line x1="150" y1="100" x2="150" y2="0"/><line x1="188" y1="100" x2="150" y2="0"/>
+        <line x1="225" y1="100" x2="150" y2="0"/><line x1="263" y1="100" x2="150" y2="0"/>
+        <line x1="300" y1="100" x2="150" y2="0"/>
+        <line x1="0" y1="75" x2="300" y2="75"/><line x1="0" y1="50" x2="300" y2="50"/>
+        <line x1="0" y1="25" x2="300" y2="25"/>
+      </g>
+    </svg>
+  </div>
+  <div class="corner c-tl"></div>
+  <div class="corner c-tr"></div>
+  <div class="shoot"></div>
+  <div class="exp-card-overlay"></div>
+  <div class="exp-card-collapsed">
+    <span class="exp-card-collapsed-title">More to Come</span>
+  </div>
+  <div class="exp-card-body">
+    <span class="exp-card-tag">Always &mdash; In progress</span>
+    <h3 class="exp-card-title">More to<br>Come</h3>
+    <p class="exp-card-desc">Still thinking. Still building. The best ideas don't arrive on schedule — they show up when you keep showing up.</p>
+  </div>
+</div>
 
       </div>
     </section>
