@@ -1293,11 +1293,7 @@
       // 6 columns: card0, card1, divider, card2, card3, card4
       var cols = [];
       var cardI = 0;
-function buildCols(idx) {
-      var totalCols = cards.length + 1;
-      var cols = [];
-      var cardI = 0;
-      for(var c=0; c<totalCols; c++){
+      for(var c=0; c<6; c++){
         if(c === DIVIDER_POS){ cols.push('12px'); continue; }
         cols.push(cardI === idx ? '5fr' : '1fr');
         cardI++;
