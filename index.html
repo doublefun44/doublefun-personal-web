@@ -549,16 +549,9 @@
    @media(max-width:768px){
   .expanding-cards{
     grid-template-columns:1fr;
-    grid-template-rows:1fr 1fr 32px 1fr 1fr 1fr 1fr;
     height:auto;min-height:820px;
     transition:grid-template-rows 0.55s cubic-bezier(0.4,0,0.2,1);
   }
-  .expanding-cards.r0{grid-template-rows:4fr 1fr 32px 1fr 1fr 1fr 1fr}
-  .expanding-cards.r1{grid-template-rows:1fr 4fr 32px 1fr 1fr 1fr 1fr}
-  .expanding-cards.r2{grid-template-rows:1fr 1fr 32px 4fr 1fr 1fr 1fr}
-  .expanding-cards.r3{grid-template-rows:1fr 1fr 32px 1fr 4fr 1fr 1fr}
-  .expanding-cards.r4{grid-template-rows:1fr 1fr 32px 1fr 1fr 4fr 1fr}
-  .expanding-cards.r5{grid-template-rows:1fr 1fr 32px 1fr 1fr 1fr 4fr}
   .exp-card{min-height:56px}
   .exp-card-collapsed{flex-direction:row;justify-content:flex-start;padding:0 1.2rem;align-items:center}
   .exp-card-collapsed-title{writing-mode:horizontal-tb;transform:none;font-size:0.58rem}
@@ -760,7 +753,7 @@
             <span class="products-label">Portfolio</span>
             <h2>Things I've <em>built</em></h2>
           </div>
-          <span class="products-count">05 projects + more brewing</span>
+          <span class="products-count">06 projects + more brewing</span>
         </div>
         <div class="products-sub-row">
           <p class="products-sub">// hover or tap to explore each project</p>
@@ -1284,21 +1277,29 @@
     var grid = document.getElementById('expCards');
     if(!grid) return;
     var cards = Array.from(grid.querySelectorAll('.exp-card'));
+    var divider = grid.querySelector('.card-divider');
     var isMobile = window.innerWidth < 768;
     var activeIdx = 0;
-    // divider sits at grid position 3 (between card index 1 and 2)
-    var DIVIDER_POS = 2;
 
-    function buildCols(idx) {
-      // 6 columns: card0, card1, divider, card2, card3, card4
-      var cols = [];
+    // Dynamically find the divider's position among grid children (0-indexed).
+    // Returns -1 if there is no divider.
+    var children = Array.from(grid.children);
+    var DIVIDER_POS = divider ? children.indexOf(divider) : -1;
+
+    function buildTracks(idx, activeSize) {
+      // Total tracks = number of cards + (1 if divider exists)
+      var totalTracks = cards.length + (DIVIDER_POS >= 0 ? 1 : 0);
+      var tracks = [];
       var cardI = 0;
-      for(var c=0; c<6; c++){
-        if(c === DIVIDER_POS){ cols.push('12px'); continue; }
-        cols.push(cardI === idx ? '5fr' : '1fr');
+      for(var t = 0; t < totalTracks; t++){
+        if(t === DIVIDER_POS){
+          tracks.push(isMobile ? '32px' : '12px');
+          continue;
+        }
+        tracks.push(cardI === idx ? activeSize : '1fr');
         cardI++;
       }
-      return cols.join(' ');
+      return tracks.join(' ');
     }
 
     function setActive(idx) {
@@ -1307,19 +1308,17 @@
         c.classList.toggle('active', i === idx);
       });
       if(isMobile) {
-        grid.className = 'expanding-cards r' + idx;
+        grid.className = 'expanding-cards';
+        grid.style.gridTemplateColumns = '1fr';
+        grid.style.gridTemplateRows = buildTracks(idx, '4fr');
       } else {
-        grid.style.gridTemplateColumns = buildCols(idx);
+        grid.style.gridTemplateColumns = buildTracks(idx, '5fr');
         grid.style.gridTemplateRows = '1fr';
       }
     }
 
-    // init desktop layout
-    if(!isMobile) {
-      grid.style.gridTemplateColumns = buildCols(0);
-    } else {
-      grid.className = 'expanding-cards r0';
-    }
+    // init
+    setActive(0);
 
     cards.forEach(function(card, i) {
       card.addEventListener('mouseenter', function(){ if(!isMobile) setActive(i); });
